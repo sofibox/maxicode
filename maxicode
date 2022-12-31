@@ -1,0 +1,663 @@
+#!/bin/bash
+#set -euo pipefail
+#"=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~="
+# Author: Arafat Ali | Email: webmaster@sofibox.com
+ADMIN_NAME="Arafat Ali"
+ADMIN_EMAIL="webmaster@sofibox.com"
+APP_SPECIFIC_NAME="MaxiCode"
+APP_DESCRIPTION="${APP_SPECIFIC_NAME} is a script used to manage maxicode binary"
+APP_STATUS="alpha"
+APP_VERSION="1.0-${APP_STATUS}"
+#"=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~="
+
+usage() {
+  echo "Usage later"
+}
+function _exit() {
+  #exit "$1"
+  :
+}
+
+function cd_to_path() {
+  local to_path="$1"
+  echo "[${SCRIPT_NAME}]: Entering directory ${to_path} ..." 2>&1 | tee -a "${REPORT_FILE}"
+  cd "${to_path}" || {
+    echo "Failed to enter into directory" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  }
+}
+
+function configure_maxicode() {
+
+  maxicode_bin="/usr/local/maxicode/maxicode"
+  if [ -f ${maxicode_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxicode_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxicode_bin}
+    # Symbolic name
+    ln -sf ${maxicode_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxicode doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxiaide() {
+  local maxiaide_bin
+  maxiaide_bin="/usr/local/maxicode/maxiaide/maxiaide"
+  if [ -f ${maxiaide_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxiaide_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxiaide_bin}
+    # Symbolic name
+    ln -sf ${maxiaide_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxiaide doesn't exist in /usr/local/maxicode!" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxicron() {
+
+  maxicron_bin="/usr/local/maxicode/maxicron/maxicron"
+  if [ -f ${maxicron_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxicron_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxicron_bin}
+    # Symbolic name
+    ln -sf ${maxicron_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxicron doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxidet() {
+
+  maxidet_bin="/usr/local/maxicode/maxidet/maxidet"
+  if [ -f ${maxidet_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxidet_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxidet_bin}
+    # Symbolic name
+    ln -sf ${maxidet_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxidet doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxihunter() {
+
+  maxihunter_bin="/usr/local/maxicode/maxihunter/maxihunter"
+  if [ -f ${maxihunter_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxihunter_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxihunter_bin}
+    # Symbolic name
+    ln -sf ${maxihunter_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxihunter doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxinet() {
+
+  maxinet_bin="/usr/local/maxicode/maxinet/maxinet"
+  if [ -f ${maxinet_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxinet_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxinet_bin}
+    # Symbolic name
+    ln -sf ${maxinet_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxinet doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxios() {
+
+  maxios_bin="/usr/local/maxicode/maxios/maxios"
+  if [ -f ${maxios_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxios_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x "${maxios_bin}"
+    # Symbolic name
+    ln -sf "${maxios_bin}" /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxios doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxibox() {
+
+  maxibox_bin="/usr/local/maxicode/maxibox/maxibox"
+  if [ -f ${maxibox_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxibox_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxibox_bin}
+    # Symbolic name
+    ln -sf ${maxibox_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxibox doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxiclam() {
+  maxiclam_bin="/usr/local/maxicode/maxiclam/maxiclam"
+
+  if [ -f ${maxiclam_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxiclam_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxiclam_bin}
+    # Symbolic name
+    ln -sf ${maxiclam_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxiclam doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxicsf() {
+
+  maxicsf_bin="/usr/local/maxicode/maxicsf/maxicsf"
+  csfdynip_bin="/usr/local/maxicode/maxicsf/csfdynip"
+  csfload_bin="/usr/local/maxicode/maxicsf/csfload"
+
+  if [ -f ${maxicsf_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxiclam_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxicsf_bin}
+    # Symbolic name
+    ln -sf ${maxicsf_bin} /usr/local/bin
+    chmod +x ${csfdynip_bin}
+    chmod +x ${csfload_bin}
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxicsf doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxigit() {
+
+  maxigit_bin="/usr/local/maxicode/maxigit/maxigit"
+  if [ -f ${maxigit_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxigit_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxigit_bin}
+    # Symbolic name
+    ln -sf ${maxigit_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxigit doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxicert() {
+
+  maxicert_bin="/usr/local/maxicode/maxicert/maxicert"
+  if [ -f ${maxicert_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxicert_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxicert_bin}
+    # Symbolic name
+    ln -sf ${maxicert_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxicert doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxinis() {
+
+  maxinis_bin="/usr/local/maxicode/maxinis/maxinis"
+  maxinis_agent="/usr/local/maxicode/maxinis/maxinis-agent"
+
+  if [ -f ${maxinis_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxinis_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxinis_bin}
+    # Symbolic name
+    ln -sf ${maxinis_bin} /usr/local/bin
+    chmod +x ${maxinis_agent}
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxinis doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxipass() {
+  maxipass_bin="/usr/local/maxicode/maxipass/maxipass"
+  if [ -f ${maxipass_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxipass_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxipass_bin}
+    # Symbolic name
+    ln -sf ${maxipass_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxipass doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxirbl() {
+  maxirbl_bin="/usr/local/maxicode/maxirbl/maxirbl"
+  if [ -f ${maxirbl_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxirbl_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxirbl_bin}
+    # Symbolic name
+    ln -sf ${maxirbl_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxirbl doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxiweb() {
+  maxiweb_bin="/usr/local/maxicode/maxiweb/maxiweb"
+  if [ -f ${maxiweb_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxiweb_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxiweb_bin}
+    # Symbolic name
+    ln -sf ${maxiweb_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxiweb doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxiwall() {
+  maxiwall_bin="/usr/local/maxicode/maxiwall/maxiwall"
+  maxirbl="/usr/local/maxicode/maxiwall/maxirbl"
+  maxiwall_agent="/usr/local/maxicode/maxiwall/maxiwall-agent"
+
+  if [ -f ${maxiwall_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxiwall_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxiwall_bin}
+    # Symbolic name
+    ln -sf ${maxiwall_bin} /usr/local/bin
+    chmod +x ${maxirbl}
+    chmod +x ${maxiwall_agent}
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxiwall doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxicloud() {
+  maxicloud_bin="/usr/local/maxicode/maxicloud/maxicloud"
+  if [ -f ${maxicloud_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxicloud_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxicloud_bin}
+    # Symbolic name
+    ln -sf ${maxicloud_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxicloud doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxida() {
+  maxida_bin="/usr/local/maxicode/maxida/maxida"
+  if [ -f ${maxida_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxida_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxida_bin}
+    # Symbolic name
+    ln -sf ${maxida_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxida doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxidns() {
+  maxidns_bin="/usr/local/maxicode/maxidns/maxidns"
+  if [ -f ${maxidns_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxidns_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxidns_bin}
+    # Symbolic name
+    ln -sf ${maxidns_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxidns doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxigpg() {
+  maxigpg_bin="/usr/local/maxicode/maxigpg/maxigpg"
+  if [ -f ${maxigpg_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxigpg_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxigpg_bin}
+    # Symbolic name
+    ln -sf ${maxigpg_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxigpg doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxilog() {
+  maxilog_bin="/usr/local/maxicode/maxilog/maxilog"
+  if [ -f ${maxilog_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxilog_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${maxilog_bin}
+    # Symbolic name
+    ln -sf ${maxilog_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxilog doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_maxiperm() {
+  maxiperm_bin="/usr/local/maxicode/maxiperm/maxiperm"
+  perm_bin="/usr/local/maxicode/maxiperm/perm"
+  if [ -f ${perm_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${maxiperm_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${perm_bin}
+    # Symbolic name
+    ln -sf ${perm_bin} /usr/local/bin
+    chmod +x ${maxiperm_bin}
+  else
+    echo "[${SCRIPT_NAME}]: Warning, maxiperm doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+
+function configure_mrootkit() {
+
+  mrootkit_bin="/usr/local/maxicode/mrootkit/mrootkit"
+  if [ -f ${mrootkit_bin} ]; then
+    echo "[${SCRIPT_NAME}]: Creating symlink and executable for ${mrootkit_bin} ..." 2>&1 | tee -a "${REPORT_FILE}"
+    chmod +x ${mrootkit_bin}
+    # Symbolic name
+    ln -sf ${mrootkit_bin} /usr/local/bin
+  else
+    echo "[${SCRIPT_NAME}]: Warning, mrootkit doesn't exist in /usr/local/maxicode !" 2>&1 | tee -a "${REPORT_FILE}"
+    _exit 1
+  fi
+}
+# This function gets the operating system ID and version number
+# syntax: get_linux_os <id|version>
+# eg: get_linux_os id | sample output: centos
+function get_linux_os() {
+  local arg distro_id distro_version
+  arg="$1"
+  # any new Linux distribution must have this (it is a standard file os checking for linux)
+  if [ -e /etc/os-release ]; then
+    # get the distro ID from /etc/os-release and make sure it is in lowercase format without any double quotations
+    distro_id=$(awk -F= '$1 == "ID" {print $2}' /etc/os-release | LC_ALL=C tr '[:upper:]' '[:lower:]' | tr -d "\"")
+    distro_version=$(awk -F= '$1 == "VERSION_ID" {print $2}' /etc/os-release | tr -d "\"")
+  # but just in case (a small case) if it doesn't have this then we can use lsb_release command
+  elif type lsb_release >/dev/null 2>&1; then
+    # get the distro id using lsb_release function.
+    # if the ID has uppercase letter, cover it to lowercase
+    distro_id=$(lsb_release -si | LC_ALL=C tr '[:upper:]' '[:lower:]')
+    distro_version=$(lsb_release -sr)
+  # else if that doesn't exist at all, we can use the standard checking version format: "Linux <version>"
+  else
+    # this will not printout a single distribution ID that we want (it prints out the Generic Linux kernel version)
+    # but using this we should terminate this script because we only need single distribution ID (eg: debian)
+    distro_id=$(uname -s)
+    distro_version=$(uname -r)
+  fi
+  # return values here with echo
+  if [ "${arg}" == "id" ]; then
+    echo "${distro_id}"
+  elif [ "${arg}" == "version" ]; then
+    echo "${distro_version}"
+  fi
+
+}
+
+# maxicode --update <script_name>
+# eg: maxicode --update maxiwall
+# Maxiwall --update all
+# This will update from git
+function update_maxicode() {
+
+  shift
+  local script
+  script="$1"
+  if [[ "${script}" == "all" ]]; then
+    shift
+    local GIT_ASKPASS
+    if ! command -v git &>/dev/null; then
+      echo "[${SCRIPT_NAME}]: Downloading git for debian ..." 2>&1 | tee -a "${REPORT_FILE}"
+      apt-get -y install git 2>&1 | tee -a "${REPORT_FILE}"
+    fi
+    echo "[${SCRIPT_NAME}]: Setting up temporary git authentication for private repository ..." 2>&1 | tee -a "${REPORT_FILE}"
+    cat /dev/null >"${HOME}/.git-askpass"
+    echo "#!/bin/bash" >>"${HOME}/.git-askpass"
+    echo "echo ${GIT_TOKEN}" >>"${HOME}/.git-askpass"
+    chmod +x "${HOME}/.git-askpass"
+    export GIT_ASKPASS="${HOME}/.git-askpass"
+    cd_to_path "${DATA_PATH}"
+    echo "[${SCRIPT_NAME}]: Removing existing maxisetup repository ..." 2>&1 | tee -a "${REPORT_FILE}"
+    # remove existing setup
+    rm -rf "${DATA_PATH}/maxisetup"
+    echo "[${SCRIPT_NAME}]: Cloning new maxisetup repository ..." 2>&1 | tee -a "${REPORT_FILE}"
+    echo "=~=~=~=~=~=~=~"
+    git clone "${SETUP_GIT_URL}" 2>&1 | tee -a "${REPORT_FILE}"
+    echo "=~=~=~=~=~=~=~"
+    # Delete these files for security
+    echo "[${SCRIPT_NAME}]: Removing git authentication and destroying its config file ..." 2>&1 | tee -a "${REPORT_FILE}"
+    rm -f "${HOME}/.git-askpass"
+    unset GIT_ASKPASS
+
+    # update itself
+    # configure_maxicode
+    # update others
+    rm -rf /usr/local/maxicode/maxiaide
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxiaide" /usr/local/maxicode
+    configure_maxiaide
+
+    rm -rf /usr/local/maxicode/maxicron
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxicron" /usr/local/maxicode/maxicron
+    configure_maxicron
+
+    rm -rf /usr/local/maxicode/maxidet
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxidet" /usr/local/maxicode/maxidet
+    configure_maxidet
+
+    rm -rf /usr/local/maxicode/maxihunter
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxihunter" /usr/local/maxicode/maxihunter
+    configure_maxihunter
+
+    rm -rf /usr/local/maxicode/maxinet
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxinet" /usr/local/maxicode/maxinet
+    configure_maxinet
+
+    rm -rf /usr/local/maxicode/maxios
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxios" /usr/local/maxicode/maxios
+    configure_maxios
+
+    rm -rf /usr/local/maxicode/maxibox
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxibox" /usr/local/maxicode/maxibox
+    configure_maxibox
+
+    rm -rf /usr/local/maxicode/maxiclam
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxiclam" /usr/local/maxicode/maxiclam
+    configure_maxiclam
+
+    rm -rf /usr/local/maxicode/maxicsf
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxicsf" /usr/local/maxicode/maxicsf
+    configure_maxicsf
+
+    rm -rf /usr/local/maxicode/maxigit
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxigit" /usr/local/maxicode/maxigit
+    configure_maxigit
+
+    rm -rf /usr/local/maxicode/maxicert
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxicert" /usr/local/maxicode/maxicert
+    configure_maxicert
+
+    rm -rf /usr/local/maxicode/maxinis
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxinis" /usr/local/maxicode/maxinis
+    configure_maxinis
+
+    rm -rf /usr/local/maxicode/maxipass
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxipass" /usr/local/maxicode/maxipass
+    configure_maxipass
+
+    rm -rf /usr/local/maxicode/maxirbl
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxirbl" /usr/local/maxicode/maxirbl
+    configure_maxirbl
+
+    rm -rf /usr/local/maxicode/maxiweb
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxiweb" /usr/local/maxicode/maxiweb
+    configure_maxiweb
+
+    rm -rf /usr/local/maxicode/maxiwall
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxiwall" /usr/local/maxicode/maxiwall
+    configure_maxiwall
+
+    rm -rf /usr/local/maxicode/maxicloud
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxicloud" /usr/local/maxicode/maxicloud
+    configure_maxicloud
+
+    rm -rf /usr/local/maxicode/maxida
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxida" /usr/local/maxicode/maxida
+    configure_maxida
+
+    rm -rf /usr/local/maxicode/maxidns
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxidns" /usr/local/maxicode/maxidns
+    configure_maxidns
+
+    rm -rf /usr/local/maxicode/maxigpg
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxigpg" /usr/local/maxicode/maxigpg
+    configure_maxigpg
+
+    rm -rf /usr/local/maxicode/maxilog
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxilog" /usr/local/maxicode/maxilog
+    configure_maxilog
+
+    rm -rf /usr/local/maxicode/maxiperm
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/maxiperm" /usr/local/maxicode/maxiperm
+    configure_maxiperm
+
+    rm -rf /usr/local/maxicode/mrootkit
+    cp -r "${DATA_PATH}/maxisetup/storage/os/${DISTRO_ID}/usr/local/maxicode/mrootkit" /usr/local/maxicode/mrootkit
+    configure_mrootkit
+
+    return 0
+    # The rest update specific script only
+  elif [[ "${script}" == "maxicode" ]]; then
+    :
+  elif [[ "${script}" == "maxiwall" ]]; then
+    :
+  elif [[ "${script}" == "maxidns" ]]; then
+    :
+  fi
+
+}
+
+SCRIPT_PATH="$(dirname "$(readlink -f "$0")")"
+SCRIPT_NAME=$(basename -- "$0")
+BOX_HOSTNAME=$(hostname)
+DATE_BIN=$(command -v date)
+MAIL_BIN=$(command -v mail)
+
+DATE_BIN=$(command -v date)
+LOG_PATH="${SCRIPT_PATH}/log"
+# Configuration path for script
+CONF_PATH="${SCRIPT_PATH}/conf"
+DATA_PATH="${SCRIPT_PATH}/data"
+CODE_PATH="${SCRIPT_PATH}/code"
+TEMP_PATH="${SCRIPT_PATH}/temp"
+
+mkdir -p "${LOG_PATH}"
+mkdir -p "${CONF_PATH}"
+mkdir -p "${DATA_PATH}"
+mkdir -p "${CODE_PATH}"
+mkdir -p "${TEMP_PATH}"
+
+# Generate random string based on date
+RANDSTR="$(${DATE_BIN} '+%d-%m-%Y_%H-%M-%S').${RANDOM}"
+DATE_TIME_NOW="$(date '+%d-%m-%Y_%H-%M-%S')" #31-03-2020--11-56-16
+REPORT_FILE="${LOG_PATH}/${SCRIPT_NAME}-${RANDSTR}-${DATE_TIME_NOW}-report.log"
+touch "${REPORT_FILE}"
+
+CONFIG_FILE="${SCRIPT_PATH}/maxicode.conf"
+if [ -s "${CONFIG_FILE}" ]; then
+  source_errs=$(source "${CONFIG_FILE}" 2>&1 >/dev/null)
+  # get the return code
+  retval=$?
+  #echo "${retval}"
+  if [ ${retval} = 0 ]; then
+    str_comm="[${SCRIPT_NAME}]: The source command returns success code [0]"
+    if [ -n "${source_errs}" ]; then
+      echo "${str_comm} but it has one or more syntax errors!" 2>&1 | tee -a "${REPORT_FILE}"
+      echo "Error details:"
+      printf "%s\n" "${source_errs}"
+      exit 1
+    else
+      echo "${str_comm} with no syntax error" 2>&1 | tee -a "${REPORT_FILE}"
+      echo "[${SCRIPT_NAME}]: Sourcing config file from ${CONFIG_FILE} ..." 2>&1 | tee -a "${REPORT_FILE}"
+      source "${CONFIG_FILE}"
+      if [[ -z ${GIT_TOKEN} ]]; then
+        echo "[${SCRIPT_NAME}]: Git TOKEN variable is empty, please set it before running this script" 2>&1 | tee -a "${REPORT_FILE}"
+        exit 1
+      fi
+
+      if [[ -z ${SETUP_GIT_URL} ]]; then
+        echo "[${SCRIPT_NAME}]:Git SETUP URL variable is empty, please set it before running this script" 2>&1 | tee -a "${REPORT_FILE}"
+        exit 1
+      fi
+
+    fi
+
+  else
+    echo "[${SCRIPT_NAME}]: [Warning]: The source command returns an error code of ${retval} when sourcing ${CONFIG_FILE}:" 2>&1 | tee -a "${REPORT_FILE}"
+    echo "Error details:"
+    printf "%s\n" "${source_errs}"
+    exit 1
+  fi
+else
+  echo "[${SCRIPT_NAME}]: Error, ${CONFIG_FILE} does not exist or empty" 2>&1 | tee -a "${REPORT_FILE}"
+
+  read -r -p "[${SCRIPT_NAME}]: Enter GIT URL: " giturl
+  echo
+  read -r -s -p "[${SCRIPT_NAME}]: Enter GIT TOKEN: " gittoken
+  echo
+
+  {
+    echo "SETUP_GIT_URL=\"${giturl}\""
+    echo "GIT_TOKEN=\"${gittoken}\""
+  } >"${CONFIG_FILE}"
+
+  source "${CONFIG_FILE}"
+fi
+
+DISTRO_ID=$(get_linux_os "id")
+
+ARGNUM="$#"
+# Handle option arguments
+if [ $ARGNUM -eq 0 ]; then
+  echo "[${SCRIPT_NAME}]: Error, no argument is supplied. Use [ ${SCRIPT_NAME} --help ] to see the valid options"
+  exit 1
+fi
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  # Display Program version
+  -v | --version)
+    echo "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~="
+    echo "=${APP_SPECIFIC_NAME}-${APP_VERSION}="
+    echo "=by Arafat Ali | arafat@sofibox.com ="
+    echo "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~="
+    break
+    ;;
+  -u | --update)
+    update_maxicode "$@"
+    echo "Skipped shred for debugging (should use GPG to hold this credential) ..."
+    # shred -uvz "${CONFIG_FILE}"
+    exit 0
+    break
+    ;;
+  --)
+    break
+    ;;
+  -*)
+    opt="$1"
+    echo "Invalid option '${opt}'. Use --help to see the valid options"
+    exit 1
+    ;;
+  *) ;;
+  esac
+  shift
+done
