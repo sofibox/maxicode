@@ -635,7 +635,7 @@ while [ "$#" -gt 0 ]; do
     exit 0
     ;;
   # Display Program version
-  -v | --version)
+  -v | -V | --version | version | ver)
     echo "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~="
     echo "=${APP_SPECIFIC_NAME}-${APP_VERSION}="
     echo "=by Arafat Ali | arafat@sofibox.com ="
